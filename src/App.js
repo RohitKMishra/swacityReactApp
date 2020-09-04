@@ -9,22 +9,42 @@ import Navbar from './components/Navbar/Navbar.component';
 
 //material-ui
 import {Grid} from '@material-ui/core';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import GettingStarted from './Screens/GettingStarted/GettingStarted.screen';
+
+// contexts
+import {Provider as TasksProvider} from './Context/TaskContext';
+import {Provider as DepartmentProvider} from './Context/DepartmentContext';
 
 function App() {
   return (
     <Router>
-      <Grid container direction='row' spacing={3} wrap='nowrap'>
-        <Grid item>
-          <Navbar />
-        </Grid>
+      <Switch>
+        <Route exact path='/getting-started'>
+          <GettingStarted />
+        </Route>
 
-        <Grid item>
-          <Routing />
-        </Grid>
-      </Grid>
+        <Route path='/'>
+          <Grid container direction='row' spacing={3} wrap='nowrap'>
+            <Grid item>
+              <Navbar />
+            </Grid>
+            <Grid item style={{width: '100%'}}>
+              <Routing />
+            </Grid>
+          </Grid>
+        </Route>
+      </Switch>
     </Router>
   );
 }
 
-export default App;
+export default function () {
+  return (
+    <DepartmentProvider>
+      <TasksProvider>
+        <App />
+      </TasksProvider>
+    </DepartmentProvider>
+  );
+}
