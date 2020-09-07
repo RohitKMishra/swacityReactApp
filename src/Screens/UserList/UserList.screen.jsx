@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Table from '../../components/Table/table';
 //context consumer
-import {Context as DepartmentContext} from '../../Context/DepartmentContext';
+import {Context as UserContext} from '../../Context/UserContext';
 
 // material ui imports
 import {
@@ -41,9 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Department() {
-  const {state: DepartmentListState} = useContext(DepartmentContext);
-  console.log(DepartmentListState);
+export default function UserListScreen() {
+  const {state: UserListState} = useContext(UserContext);
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -63,7 +62,7 @@ export default function Department() {
       alignItems='stretch'
       style={{marginTop: '1.5rem'}}>
       <Grid item style={{marginLeft: '1.5rem'}}>
-        <Typography variant='h4'> Departments </Typography>
+        <Typography variant='h4'> Users </Typography>
       </Grid>
 
       <Grid
@@ -96,30 +95,30 @@ export default function Department() {
             <Fade in={open}>
               <div className={classes.paper}>
                 <Grid item>
-                  <Typography variant='h5'> Add Department</Typography>
+                  <Typography variant='h5'> Add User </Typography>
                   <form>
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Name'
+                      label='Full Name'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Head Office Address'
+                      label='Role'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Person in Charge'
+                      label='Phone'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='in Charge Phone'
+                      label='Department'
                     />
                     <br />
                   </form>
@@ -141,34 +140,31 @@ export default function Department() {
       </Grid>
 
       <Grid item>
-        <Table
-          data={DepartmentListState.departments}
-          columns={departmentListColumns}
-        />
+        <Table data={UserListState.users} columns={UserListColumns} />
       </Grid>
     </Grid>
   );
 }
 
-const departmentListColumns = [
+const UserListColumns = [
   {
     Header: 'Name',
     accessor: 'name',
   },
   {
-    Header: 'Person in Charge',
-    accessor: 'inCharge.name',
+    Header: 'UserRole',
+    accessor: 'userRole',
   },
   {
-    Header: 'Total Workers',
-    accessor: 'totalWorkers',
+    Header: 'Phone',
+    accessor: 'mobileNumber',
   },
   {
-    Header: 'Total SuperVisor',
-    accessor: 'totalSuperVisors',
+    Header: 'Availability',
+    accessor: 'userAvailableToday',
   },
   {
-    Header: 'Total Assets',
-    accessor: 'totalAssets',
+    Header: 'Department',
+    accessor: 'department.name',
   },
 ];

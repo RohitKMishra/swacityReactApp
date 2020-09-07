@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Table from '../../components/Table/table';
 //context consumer
-import {Context as DepartmentContext} from '../../Context/DepartmentContext';
+import {Context as TaskContext} from '../../Context/TaskContext';
 
 // material ui imports
 import {
@@ -41,9 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Department() {
-  const {state: DepartmentListState} = useContext(DepartmentContext);
-  console.log(DepartmentListState);
+export default function TaskListScreen() {
+  const {state: TaskListState} = useContext(TaskContext);
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -63,7 +62,7 @@ export default function Department() {
       alignItems='stretch'
       style={{marginTop: '1.5rem'}}>
       <Grid item style={{marginLeft: '1.5rem'}}>
-        <Typography variant='h4'> Departments </Typography>
+        <Typography variant='h4'> Tasks </Typography>
       </Grid>
 
       <Grid
@@ -96,30 +95,24 @@ export default function Department() {
             <Fade in={open}>
               <div className={classes.paper}>
                 <Grid item>
-                  <Typography variant='h5'> Add Department</Typography>
+                  <Typography variant='h5'> Add Tasks </Typography>
                   <form>
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Name'
+                      label='Title'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Head Office Address'
+                      label='Department'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Person in Charge'
-                    />
-                    <br />
-                    <TextField
-                      className={classes.textField}
-                      id='standard-basic'
-                      label='in Charge Phone'
+                      label='SuperVisor inCharge'
                     />
                     <br />
                   </form>
@@ -141,34 +134,35 @@ export default function Department() {
       </Grid>
 
       <Grid item>
-        <Table
-          data={DepartmentListState.departments}
-          columns={departmentListColumns}
-        />
+        <Table data={TaskListState.tasks} columns={TaskListColumns} />
       </Grid>
     </Grid>
   );
 }
 
-const departmentListColumns = [
+const TaskListColumns = [
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Title',
+    accessor: 'title',
   },
   {
-    Header: 'Person in Charge',
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Start Time',
+    accessor: 'startTime',
+  },
+  {
+    Header: 'End Time',
+    accessor: 'endTime',
+  },
+  {
+    Header: 'Department',
+    accessor: 'department.name',
+  },
+  {
+    Header: 'In Charge',
     accessor: 'inCharge.name',
-  },
-  {
-    Header: 'Total Workers',
-    accessor: 'totalWorkers',
-  },
-  {
-    Header: 'Total SuperVisor',
-    accessor: 'totalSuperVisors',
-  },
-  {
-    Header: 'Total Assets',
-    accessor: 'totalAssets',
   },
 ];

@@ -19,8 +19,7 @@ function createRandomUsers(n) {
   for (var i = 0; i < n; i++) {
     usersArray.push({
       id: uuidv4(),
-      firstName: namor.generate({words: 1, numbers: 0}),
-      lastName: namor.generate({words: 1, numbers: 0}),
+      name: namor.generate({words: 2, numbers: 0}),
       userRole: Math.floor(Math.random() * 2) ? 'SuperVisor' : 'Worker',
       mobileNumber: Math.floor(Math.random() * 10000000000),
       userAvailableToday: Math.floor(Math.random() * 2) ? 'true' : 'false',
@@ -31,7 +30,7 @@ function createRandomUsers(n) {
   }
   return usersArray;
 }
-users = createRandomUsers(56);
+const users = createRandomUsers(5600);
 
 export const {Provider, Context} = createDataContext(
   userReducer,

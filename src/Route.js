@@ -5,6 +5,10 @@ import GettingStarted from './Screens/GettingStarted/GettingStarted.screen';
 
 //Screens
 import DepartmentListScreen from './Screens/DepartmentList/DepartmentList.screen';
+import AssetListScreen from './Screens/AssetList/AssetList.screen';
+import UserListScreen from './Screens/UserList/UserList.screen';
+import TaskListScreen from './Screens/TaskList/TaskList.screen';
+
 const Routing = () => {
   return (
     <div>
@@ -12,17 +16,20 @@ const Routing = () => {
         <Route exact path='/deparments'>
           <DepartmentListScreen />
         </Route>{' '}
+        <Route exact path='/departments/:id'>
+          <h3>This is deparments id</h3>
+        </Route>{' '}
         <Route exact path='/zones'>
           <h3> This is Zones </h3>{' '}
         </Route>{' '}
         <Route exact path='/users'>
-          <h3> This is Users page </h3>{' '}
+          <UserListScreen />
         </Route>{' '}
         <Route exact path='/tasks'>
-          <h3> This is Tasks page </h3>{' '}
+          <TaskListScreen />
         </Route>{' '}
         <Route exact path='/assets'>
-          <h3> This is Assets page </h3>{' '}
+          <AssetListScreen />
         </Route>{' '}
         <Route exact path='/reports'>
           <h3> This is Reports page </h3>{' '}

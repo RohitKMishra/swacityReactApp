@@ -42,14 +42,14 @@ function createRandomAssets(n) {
             return 'Needs Service';
         }
       })(),
-      departments: {
+      department: {
         id: uuidv4(),
         name: namor.generate({words: 1, numbers: 0}),
       },
       inCharge: {
         id: uuidv4(),
-        firstName: namor.generate({words: 1, numbers: 0}),
-        lastName: namor.generate({words: 1, numbers: 0}),
+        name: namor.generate({words: 2, numbers: 0}),
+        
       },
       lastLocation: {},
     });

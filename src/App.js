@@ -15,6 +15,8 @@ import GettingStarted from './Screens/GettingStarted/GettingStarted.screen';
 // contexts
 import {Provider as TasksProvider} from './Context/TaskContext';
 import {Provider as DepartmentProvider} from './Context/DepartmentContext';
+import {Provider as AssetProvider} from './Context/AssetContext';
+import {Provider as UserProvider} from './Context/UserContext';
 
 function App() {
   return (
@@ -25,11 +27,11 @@ function App() {
         </Route>
 
         <Route path='/'>
-          <Grid container direction='row' spacing={3} wrap='nowrap'>
+          <Grid container direction='row' spacing={4} wrap='nowrap'>
             <Grid item>
               <Navbar />
             </Grid>
-            <Grid item style={{width: '100%'}}>
+            <Grid item style={{width: '100%', marginLeft: '11rem'}}>
               <Routing />
             </Grid>
           </Grid>
@@ -42,9 +44,13 @@ function App() {
 export default function () {
   return (
     <DepartmentProvider>
-      <TasksProvider>
-        <App />
-      </TasksProvider>
+      <AssetProvider>
+        <TasksProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </TasksProvider>
+      </AssetProvider>
     </DepartmentProvider>
   );
 }

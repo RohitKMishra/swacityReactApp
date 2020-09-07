@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Table from '../../components/Table/table';
 //context consumer
-import {Context as DepartmentContext} from '../../Context/DepartmentContext';
+import {Context as AssetContext} from '../../Context/AssetContext';
 
 // material ui imports
 import {
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Department() {
-  const {state: DepartmentListState} = useContext(DepartmentContext);
-  console.log(DepartmentListState);
+  const {state: AssetListState} = useContext(AssetContext);
+  console.log(AssetListState);
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -63,7 +63,7 @@ export default function Department() {
       alignItems='stretch'
       style={{marginTop: '1.5rem'}}>
       <Grid item style={{marginLeft: '1.5rem'}}>
-        <Typography variant='h4'> Departments </Typography>
+        <Typography variant='h4'> Assets </Typography>
       </Grid>
 
       <Grid
@@ -96,30 +96,36 @@ export default function Department() {
             <Fade in={open}>
               <div className={classes.paper}>
                 <Grid item>
-                  <Typography variant='h5'> Add Department</Typography>
+                  <Typography variant='h5'> Add Asset </Typography>
                   <form>
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Name'
+                      label='Type'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Head Office Address'
+                      label='Status'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='Person in Charge'
+                      label='Condition'
                     />
                     <br />
                     <TextField
                       className={classes.textField}
                       id='standard-basic'
-                      label='in Charge Phone'
+                      label='Departments'
+                    />
+                    <br />
+                    <TextField
+                      className={classes.textField}
+                      id='standard-basic'
+                      label='Incharge'
                     />
                     <br />
                   </form>
@@ -141,10 +147,7 @@ export default function Department() {
       </Grid>
 
       <Grid item>
-        <Table
-          data={DepartmentListState.departments}
-          columns={departmentListColumns}
-        />
+        <Table data={AssetListState.assets} columns={departmentListColumns} />
       </Grid>
     </Grid>
   );
@@ -152,23 +155,23 @@ export default function Department() {
 
 const departmentListColumns = [
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Type',
+    accessor: 'type',
   },
   {
-    Header: 'Person in Charge',
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Condition',
+    accessor: 'condition',
+  },
+  {
+    Header: 'Departments',
+    accessor: 'department.name',
+  },
+  {
+    Header: 'Incharge ',
     accessor: 'inCharge.name',
-  },
-  {
-    Header: 'Total Workers',
-    accessor: 'totalWorkers',
-  },
-  {
-    Header: 'Total SuperVisor',
-    accessor: 'totalSuperVisors',
-  },
-  {
-    Header: 'Total Assets',
-    accessor: 'totalAssets',
   },
 ];

@@ -46,14 +46,13 @@ function createRandomTasks(n) {
         words: Math.floor(Math.random() * 3),
         numbers: 0,
       }),
-      departments: {
+      department: {
         id: uuidv4(),
         name: namor.generate({words: 1, numbers: 0}),
       },
       inCharge: {
         id: uuidv4(),
-        firstName: namor.generate({words: 1, numbers: 0}),
-        lastName: namor.generate({words: 1, numbers: 0}),
+        name: namor.generate({words: 2, numbers: 0}),
       },
       assignedWorkers: ((_) => {
         const random = Math.floor(Math.random() * 7);
