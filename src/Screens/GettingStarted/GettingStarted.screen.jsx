@@ -1,17 +1,25 @@
-import React, {useState} from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import {Step, FormControl, Paper, Container} from '@material-ui/core';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import {TextField} from '@material-ui/core';
-import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import {
+  Step,
+  FormControl,
+  Paper,
+  Container,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { TextField } from "@material-ui/core";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -23,19 +31,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Add Country', 'Add State', 'Add District', 'Add City'];
+  return ["Add Country", "Add State", "Add District", "Add City"];
 }
+
+const countries = [
+  "Algeria",
+  "Belgium",
+  "Cuba",
+  "Canada",
+  "Denmark",
+  "France",
+  "India",
+  "Japan",
+  "Malasiya",
+  "USA",
+];
 
 export default function GettingStarted() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [state, setState] = useState({
-    countryName: '',
-    cityName: '',
-    stateName: '',
-    districtName: '',
-    personalDetails: '',
+    countryName: "",
+    cityName: "",
+    stateName: "",
+    districtName: "",
+    personalDetails: "",
   });
+
+  const [country, setCountry] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleChange = (e) => setCountry(e.target.value);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const steps = getSteps();
 
   const handleNext = () => {
@@ -69,20 +104,37 @@ export default function GettingStarted() {
           </Step>
         ))}
       </Stepper>
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Paper elevation={3} style={{width: '50vw', padding: '20px'}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Paper elevation={3} style={{ width: "50vw", padding: "20px" }}>
           {activeStep === 0 ? (
             <FormControl
               className={classes.root}
               noValidate
-              autoComplete='off'
-              fullWidth>
-              <TextField
+              autoComplete="off"
+              fullWidth
+            >
+              <InputLabel id="select-country">Country</InputLabel>
+              <Select
+                open={open}
+                value={country}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                onChange={handleChange}
+                id="select-country"
+              >
+                {countries.map((country) => (
+                  <MenuItem key={country} value={country}>
+                    {country}
+                  </MenuItem>
+                ))}
+              </Select>
+
+              {/* <TextField
                 id='standard-basic'
                 label='Country name'
                 name='countryName'
                 onChange={onChange}
-              />
+              /> */}
             </FormControl>
           ) : null}
 
@@ -90,12 +142,13 @@ export default function GettingStarted() {
             <FormControl
               className={classes.root}
               noValidate
-              autoComplete='off'
-              fullWidth>
+              autoComplete="off"
+              fullWidth
+            >
               <TextField
-                id='standard-basic'
-                label='State name'
-                name='stateName'
+                id="standard-basic"
+                label="State name"
+                name="stateName"
                 onChange={onChange}
               />
             </FormControl>
@@ -104,12 +157,13 @@ export default function GettingStarted() {
             <FormControl
               className={classes.root}
               noValidate
-              autoComplete='off'
-              fullWidth>
+              autoComplete="off"
+              fullWidth
+            >
               <TextField
-                id='standard-basic'
-                label='State name'
-                name='stateName'
+                id="standard-basic"
+                label="State name"
+                name="stateName"
                 onChange={onChange}
               />
             </FormControl>
@@ -119,12 +173,13 @@ export default function GettingStarted() {
             <FormControl
               className={classes.root}
               noValidate
-              autoComplete='off'
-              fullWidth>
+              autoComplete="off"
+              fullWidth
+            >
               <TextField
-                id='standard-basic'
-                label='District name'
-                name='districtName'
+                id="standard-basic"
+                label="District name"
+                name="districtName"
                 onChange={onChange}
               />
             </FormControl>
@@ -136,11 +191,12 @@ export default function GettingStarted() {
                 <Button
                   disabled={activeStep === 0}
                   onClick={handleBack}
-                  className={classes.button}>
+                  className={classes.button}
+                >
                   Back
                 </Button>
                 <Button onClick={handleReset} className={classes.button}>
-                  <Link to='/'>Finish</Link>
+                  <Link to="/">Finish</Link>
                 </Button>
               </>
             ) : (
@@ -148,15 +204,17 @@ export default function GettingStarted() {
                 <Button
                   disabled={activeStep === 0}
                   onClick={handleBack}
-                  className={classes.button}>
+                  className={classes.button}
+                >
                   Back
                 </Button>
                 <Button
-                  variant='contained'
-                  color='primary'
+                  variant="contained"
+                  color="primary"
                   onClick={handleNext}
-                  className={classes.button}>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  className={classes.button}
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
                 </Button>
               </>
             )}
